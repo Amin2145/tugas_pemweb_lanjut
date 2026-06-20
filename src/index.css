@@ -1,0 +1,446 @@
+@import "tailwindcss";
+
+@theme {
+  --color-coffee-50: #FAF6F0;
+  --color-coffee-100: #F3ECE3;
+  --color-coffee-200: #E4D8CD;
+  --color-coffee-300: #CBB5A1;
+  --color-coffee-400: #A88C72;
+  --color-coffee-500: #8D6E63;
+  --color-coffee-600: #795548;
+  --color-coffee-700: #6D4C41;
+  --color-coffee-800: #5D4037;
+  --color-coffee-900: #3E2723;
+  --color-accent: #FF8F00;
+  --color-accent-light: #FFB300;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: 'Outfit', 'Inter', sans-serif;
+}
+
+/* Base Defaults & Global Styling */
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Premium Apple-like Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(141, 110, 99, 0.3);
+  border-radius: 99px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(109, 76, 65, 0.5);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+/* POS product grid */
+.pos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 0.85rem;
+}
+
+/* Receipt Print styles */
+@media print {
+  body * { visibility: hidden; }
+  #receipt-print, #receipt-print * { visibility: visible; }
+  #receipt-print {
+    position: absolute; left: 0; top: 0;
+    width: 80mm; font-family: 'Courier New', monospace;
+    color: #000; background: #fff; padding: 4mm;
+  }
+}
+
+/* ============================================================
+   LIGHT THEME SYSTEM (html.light)
+   ============================================================ */
+
+html.light body {
+  background: radial-gradient(circle at 10% 20%, rgba(177, 122, 67, 0.06) 0%, rgba(250, 248, 245, 1) 90%), 
+              radial-gradient(circle at 90% 80%, rgba(255, 224, 178, 0.25) 0%, rgba(250, 248, 245, 1) 90%), 
+              #FAF8F5 !important;
+  color: #3E2723 !important;
+}
+
+html.light main.flex-1 {
+  background: transparent !important;
+}
+
+html.light .bg-coffee-900 {
+  background: transparent !important;
+}
+
+/* Light Glass Sidebar (Apple iOS design) */
+html.light aside {
+  background: rgba(255, 255, 255, 0.4) !important;
+  backdrop-filter: blur(24px) saturate(190%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(190%) !important;
+  border-right: 1px solid rgba(228, 216, 205, 0.4) !important;
+  box-shadow: 4px 0 32px 0 rgba(62, 39, 35, 0.02) !important;
+}
+
+html.light aside div.border-b {
+  border-bottom-color: rgba(228, 216, 205, 0.3) !important;
+}
+
+html.light aside a, 
+html.light aside button {
+  color: #5D4037 !important;
+}
+
+html.light aside a:hover {
+  background: rgba(177, 122, 67, 0.08) !important;
+  color: #3E2723 !important;
+}
+
+html.light aside a.active {
+  background: #B17A43 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 8px 16px -4px rgba(177, 122, 67, 0.2) !important;
+}
+
+html.light aside a.active * {
+  color: #FFFFFF !important;
+}
+
+html.light aside p.text-white {
+  color: #3E2723 !important;
+}
+
+/* Light Glass Header */
+html.light header {
+  background: rgba(255, 255, 255, 0.3) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(228, 216, 205, 0.3) !important;
+  box-shadow: 0 4px 30px 0 rgba(62, 39, 35, 0.01) !important;
+}
+
+html.light header h2, 
+html.light header p, 
+html.light header span, 
+html.light header div, 
+html.light header svg {
+  color: #3E2723 !important;
+}
+
+/* Glass Panels (Cards) */
+html.light .bg-coffee-800\/60, 
+html.light .bg-coffee-800\/80, 
+html.light .bg-coffee-800 {
+  background: rgba(255, 255, 255, 0.45) !important;
+  backdrop-filter: blur(24px) saturate(190%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(190%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.7) !important;
+  box-shadow: 0 10px 40px -10px rgba(62, 39, 35, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.6) !important;
+  border-radius: 1.25rem;
+}
+
+/* Typography map */
+html.light h2, 
+html.light h3, 
+html.light h4, 
+html.light th, 
+html.light td, 
+html.light label {
+  color: #3E2723 !important;
+}
+
+html.light p.text-coffee-300, 
+html.light p.text-coffee-400, 
+html.light span.text-coffee-300, 
+html.light span.text-coffee-400, 
+html.light td.text-coffee-300,
+html.light div.text-coffee-300,
+html.light div.text-coffee-400 {
+  color: #6D4C41 !important;
+}
+
+html.light .text-white, 
+html.light .font-extrabold.text-white, 
+html.light .font-bold.text-white {
+  color: #3E2723 !important;
+}
+
+/* Buttons Light Mode */
+html.light button.bg-accent, 
+html.light a.bg-accent,
+html.light button.bg-coffee-700, 
+html.light button.bg-coffee-600,
+html.light button.bg-red-900\/50,
+html.light .bg-accent {
+  background: linear-gradient(135deg, #B17A43 0%, #9E6A34 100%) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 14px 0 rgba(177, 122, 67, 0.25) !important;
+  border: none !important;
+}
+
+html.light button.bg-accent *, 
+html.light a.bg-accent * {
+  color: #FFFFFF !important;
+}
+
+html.light button.bg-accent:hover, 
+html.light a.bg-accent:hover {
+  background: linear-gradient(135deg, #C68E56 0%, #B17A43 100%) !important;
+  box-shadow: 0 6px 20px 0 rgba(177, 122, 67, 0.35) !important;
+}
+
+/* Secondary Button Light Glass */
+html.light button.bg-white\/5, 
+html.light a.bg-white\/5 {
+  background: rgba(255, 255, 255, 0.4) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(228, 216, 205, 0.5) !important;
+  color: #5D4037 !important;
+}
+
+html.light button.bg-white\/5:hover, 
+html.light a.bg-white\/5:hover {
+  background: rgba(255, 255, 255, 0.6) !important;
+  border-color: rgba(177, 122, 67, 0.3) !important;
+  color: #3E2723 !important;
+}
+
+html.light button.bg-white\/5 *, 
+html.light a.bg-white\/5 * {
+  color: #5D4037 !important;
+}
+
+html.light .bg-accent\/10 {
+  background-color: rgba(177, 122, 67, 0.1) !important;
+  color: #B17A43 !important;
+}
+
+/* Forms & inputs */
+html.light input, 
+html.light select, 
+html.light textarea {
+  background: rgba(255, 255, 255, 0.7) !important;
+  border: 1px solid rgba(228, 216, 205, 0.6) !important;
+  color: #3E2723 !important;
+  border-radius: 0.75rem;
+}
+
+html.light input::placeholder, 
+html.light textarea::placeholder {
+  color: #CBB5A1 !important;
+}
+
+html.light input:focus, 
+html.light select:focus, 
+html.light textarea:focus {
+  background: #FFFFFF !important;
+  border-color: #B17A43 !important;
+  box-shadow: 0 0 0 3px rgba(177, 122, 67, 0.1) !important;
+}
+
+/* Tables */
+html.light table th {
+  color: #6D4C41 !important;
+  border-bottom: 2px solid rgba(228, 216, 205, 0.4) !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+}
+
+html.light table td {
+  border-bottom: 1px solid rgba(228, 216, 205, 0.25) !important;
+}
+
+html.light table tr:hover td {
+  background-color: rgba(177, 122, 67, 0.03) !important;
+}
+
+/* Inner containers */
+html.light .bg-coffee-900\/50, 
+html.light .bg-coffee-900\/60, 
+html.light .bg-coffee-900\/40,
+html.light .bg-coffee-900\/80 {
+  background: rgba(255, 255, 255, 0.5) !important;
+  border: 1px solid rgba(228, 216, 205, 0.4) !important;
+  border-radius: 0.75rem;
+}
+
+html.light .bg-coffee-900\/50 *, 
+html.light .bg-coffee-900\/60 *, 
+html.light .bg-coffee-900\/40 *,
+html.light .bg-coffee-900\/80 * {
+  color: #3E2723 !important;
+}
+
+html.light button.bg-coffee-800\/60.text-left {
+  background: rgba(255, 255, 255, 0.6) !important;
+  border: 1px solid rgba(228, 216, 205, 0.4) !important;
+}
+
+html.light button.bg-coffee-800\/60.text-left:hover {
+  border-color: #B17A43 !important;
+  background: rgba(255, 255, 255, 0.8) !important;
+  box-shadow: 0 8px 24px 0 rgba(177, 122, 67, 0.06) !important;
+}
+
+html.light .bg-coffee-700\/50, 
+html.light .bg-coffee-700\/30, 
+html.light .bg-coffee-700 {
+  background: rgba(255, 255, 255, 0.5) !important;
+  border: 1px solid rgba(228, 216, 205, 0.4) !important;
+  color: #5D4037 !important;
+}
+
+html.light .bg-coffee-700\/50:hover, 
+html.light .bg-coffee-700\/30:hover, 
+html.light .bg-coffee-700:hover {
+  background: rgba(177, 122, 67, 0.08) !important;
+  color: #3E2723 !important;
+}
+
+
+/* ============================================================
+   DARK THEME SYSTEM (html.dark)
+   ============================================================ */
+
+html.dark body {
+  background: radial-gradient(circle at 10% 20%, rgba(93, 64, 55, 0.22) 0%, rgba(18, 10, 8, 1) 85%), 
+              radial-gradient(circle at 90% 80%, rgba(255, 143, 0, 0.07) 0%, rgba(18, 10, 8, 1) 85%), 
+              #120A08 !important;
+  color: #FFFFFF !important;
+}
+
+html.dark main.flex-1 {
+  background: transparent !important;
+}
+
+html.dark .bg-coffee-900 {
+  background: transparent !important;
+}
+
+/* Dark Glass Sidebar */
+html.dark aside {
+  background: rgba(20, 10, 8, 0.4) !important;
+  backdrop-filter: blur(28px) saturate(190%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
+  box-shadow: 4px 0 32px 0 rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Dark Glass Header */
+html.dark header {
+  background: rgba(20, 10, 8, 0.35) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+  box-shadow: 0 4px 30px 0 rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Glass Panels (Cards) */
+html.dark .bg-coffee-800\/60, 
+html.dark .bg-coffee-800\/80, 
+html.dark .bg-coffee-800 {
+  background: rgba(30, 18, 16, 0.35) !important;
+  backdrop-filter: blur(28px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(200%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.07) !important;
+  box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.5), inset 0 1px 0px rgba(255, 255, 255, 0.08) !important;
+  border-radius: 1.25rem;
+}
+
+/* Active buttons - premium glowing gold/amber gradient */
+html.dark button.bg-accent, 
+html.dark a.bg-accent,
+html.dark .bg-accent {
+  background: linear-gradient(135deg, #FF8F00 0%, #E65100 100%) !important;
+  color: #120A08 !important;
+  box-shadow: 0 4px 16px 0 rgba(255, 143, 0, 0.25) !important;
+  border: none !important;
+}
+
+html.dark button.bg-accent *, 
+html.dark a.bg-accent * {
+  color: #120A08 !important;
+}
+
+html.dark button.bg-accent:hover, 
+html.dark a.bg-accent:hover {
+  background: linear-gradient(135deg, #FFB300 0%, #FF8F00 100%) !important;
+  box-shadow: 0 6px 22px 0 rgba(255, 143, 0, 0.4) !important;
+}
+
+/* Dark mode inputs */
+html.dark input, 
+html.dark select, 
+html.dark textarea {
+  background: rgba(20, 10, 8, 0.5) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #FFFFFF !important;
+  border-radius: 0.75rem;
+}
+
+html.dark input:focus, 
+html.dark select:focus, 
+html.dark textarea:focus {
+  background: rgba(20, 10, 8, 0.7) !important;
+  border-color: #FF8F00 !important;
+  box-shadow: 0 0 0 3px rgba(255, 143, 0, 0.1) !important;
+}
+
+/* POS product items in Dark Mode */
+html.dark button.bg-coffee-800\/60.text-left {
+  background: rgba(30, 18, 16, 0.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.04) !important;
+}
+
+html.dark button.bg-coffee-800\/60.text-left:hover {
+  border-color: #FF8F00 !important;
+  background: rgba(30, 18, 16, 0.6) !important;
+  box-shadow: 0 8px 24px 0 rgba(255, 143, 0, 0.08) !important;
+}
+
+html.dark .bg-coffee-900\/50, 
+html.dark .bg-coffee-900\/60, 
+html.dark .bg-coffee-900\/40,
+html.dark .bg-coffee-900\/80 {
+  background: rgba(20, 10, 8, 0.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  border-radius: 0.75rem;
+}
+
+
+/* ============================================================
+   ADDITIONAL ENHANCEMENTS & PREMIUM MICRO-ANIMATIONS
+   ============================================================ */
+
+/* Hover transitions */
+button, a, select, input, .card {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover\:shadow-xl:hover {
+  transform: translateY(-2px);
+}
+
+/* Card entry staggered slideUp */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.bg-coffee-800\/60, .bg-coffee-800\/80 {
+  animation: slideUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Pulse soft neon glow on accent elements */
+.glowing-accent {
+  box-shadow: 0 0 15px 1px rgba(255, 143, 0, 0.2);
+}
